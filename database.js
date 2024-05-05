@@ -9,7 +9,7 @@ db.serialize(function() {
 });
 
 // Função para inserir dados no banco de dados
-function salvarNoBancoDeDados(objeto) {
+function salvarNoBancoDeDados(objeto) { 
   db.serialize(function () {
       let stmt = db.prepare("INSERT INTO cadastros (Nome, Nasc, CPF, Senha, NomeResponsavel, EmailResponsavel, TelefoneResponsavel) VALUES (?, ?, ?, ?, ?, ?, ?)");
       stmt.run(objeto.nomeCompleto, objeto.dataNascimento, objeto.cpf, objeto.senha, objeto.nomeResponsavel, objeto.emailResponsavel, objeto.telefoneResponsavel, function (err) {
