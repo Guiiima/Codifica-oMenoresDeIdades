@@ -34,38 +34,44 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
-    // Form submission handling
-    document.getElementById('cadastroForm').addEventListener('submit', function (event) {
-        event.preventDefault();
+    document.addEventListener('DOMContentLoaded', function () {
+        // Criar o banco de dados
+        var db = criarTabela();
 
-        // Get form values
-        var nomeCompleto = document.getElementById('nomeCompleto').value;
-        var dataNascimento = document.getElementById('dataNascimento').value;
-        var cpf = document.getElementById('cpf').value;
-        var nomeResponsavel = document.getElementById('nomeResponsavel').value;
-        var emailResponsavel = document.getElementById('emailResponsavel').value;
-        var telefoneResponsavel = document.getElementById('telefoneResponsavel').value;
+        // Form submission handling
+        document.getElementById('cadastroForm').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-        // Encriptar dados sensíveis
-        var dadosEncriptados = {
-            cpf: encryptData(cpf, "chaveDeEncriptacao123"),
-            dataNascimento: encryptData(dataNascimento, "chaveDeEncriptacao123")
-        };
+            // Get form values
+            var nomeCompleto = document.getElementById('nomeCompleto').value;
+            var dataNascimento = document.getElementById('dataNascimento').value;
+            var cpf = document.getElementById('cpf').value;
+            var nomeResponsavel = document.getElementById('nomeResponsavel').value;
+            var emailResponsavel = document.getElementById('emailResponsavel').value;
+            var telefoneResponsavel = document.getElementById('telefoneResponsavel').value;
 
-        // Objeto preparado para ser enviado para o banco de dados
-        var objetoParaBancoDeDados = {
-            nomeCompleto: nomeCompleto,
-            cpf: dadosEncriptados.cpf.ciphertext,
-            dataNascimento: dadosEncriptados.dataNascimento.ciphertext,
-            nomeResponsavel: nomeResponsavel,
-            emailResponsavel: emailResponsavel,
-            telefoneResponsavel: telefoneResponsavel
-        };
+            // Encriptar dados sensíveis
+            var dadosEncriptados = {
+                cpf: encryptData(cpf, "chaveDeEncriptacao123"),
+                dataNascimento: encryptData(dataNascimento, "chaveDeEncriptacao123")
+            };
 
-        // Exemplo de como os dados encriptados seriam enviados para o banco de dados
-        salvarNoBancoDeDados(objetoParaBancoDeDados);
+            // Objeto preparado para ser enviado para o banco de dados
+            var objetoParaBancoDeDados = {
+                nomeCompleto: nomeCompleto,
+                cpf: dadosEncriptados.cpf.ciphertext,
+                dataNascimento: dadosEncriptados.dataNascimento.ciphertext,
+                nomeResponsavel: nomeResponsavel,
+                emailResponsavel: emailResponsavel,
+                telefoneResponsavel: telefoneResponsavel
+            };
 
-        // Clear form fields
-        this.reset();
+            // Chamar a função para salvar no banco de dados, passando o banco de dados como parâmetro
+            salvarNoBancoDeDados(db, objetoParaBancoDeDados);
+
+            // Clear form fields
+            this.reset();
+        });
     });
+
 });
