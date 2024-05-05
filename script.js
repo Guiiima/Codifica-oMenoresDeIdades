@@ -1,5 +1,3 @@
-const { salvarNoBancoDeDados } = require("./database");
-
 document.addEventListener('DOMContentLoaded', function () {
     // Máscara para o CPF
     var cpfInput = document.getElementById('cpf');

@@ -22,6 +22,3 @@ function salvarNoBancoDeDados(objeto) {
       stmt.finalize();
   });
 }
-
-// Exportando a função para ser utilizada em outros arquivos
-module.exports = { salvarNoBancoDeDados };
