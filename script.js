@@ -68,10 +68,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Chamar a função para salvar no banco de dados, passando o banco de dados como parâmetro
             salvarNoBancoDeDados(db, objetoParaBancoDeDados);
-
             // Clear form fields
             this.reset();
         });
     });
-
 });
+const database = require('./database');
+
+// Função para recuperar os dados
+function recuperarDados() {
+  database.recuperarDoBancoDeDados(function(err, dados) {
+    if (err) {
+      console.error('Erro ao recuperar dados:', err);
+    } else {
+      console.log('Dados recuperados:', dados);
+    }
+  });
+}
+recuperarDados();

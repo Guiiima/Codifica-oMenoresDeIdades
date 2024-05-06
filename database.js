@@ -21,5 +21,17 @@ function salvarNoBancoDeDados(db, objeto) {
           console.log('Sucesso ao gravar no banco de dados');
       }
   });
+  function recuperarDoBancoDeDados(db, callback) {
+    var sql = "SELECT * FROM dados";
+    db.all(sql, [], function(err, rows) {
+      if (err) {
+        console.error('Erro ao recuperar dados do banco de dados:', err.message);
+        callback(err, null);
+      } else {
+        console.log('Dados recuperados do banco de dados com sucesso');
+        callback(null, rows);
+      }
+    });
+  }
 }
 
