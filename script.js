@@ -73,16 +73,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-const database = require('./database');
-
-// Função para recuperar os dados
-function recuperarDados() {
-  database.recuperarDoBancoDeDados(function(err, dados) {
-    if (err) {
-      console.error('Erro ao recuperar dados:', err);
-    } else {
-      console.log('Dados recuperados:', dados);
-    }
-  });
-}
-recuperarDados();
